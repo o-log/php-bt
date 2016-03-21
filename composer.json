@@ -1,0 +1,8 @@
+{
+  "name": "o-log/php-bt",
+  "autoload" : {
+    "psr-0" : {
+      "OLOG" : ""
+    }
+  }
+}
