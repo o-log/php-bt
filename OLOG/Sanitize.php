@@ -1,6 +1,6 @@
 <?php
 
-namespace OLOG\CRUD;
+namespace OLOG;
 
 class Sanitize
 {

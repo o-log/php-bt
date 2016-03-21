@@ -1,8 +1,8 @@
 <?php
 
-namespace CRUDDemo;
+namespace OLOG;
 
-use OLOG\CRUD\Sanitize;
+use OLOG\Sanitize;
 
 class BT
 {
