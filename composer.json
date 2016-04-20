@@ -1,5 +1,6 @@
 {
   "name": "o-log/php-bt",
+  "description": "PHP wrapper for Bootstrap",
   "autoload" : {
     "psr-0" : {
       "OLOG" : ""
