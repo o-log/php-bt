@@ -16,7 +16,7 @@ class BT
     }
 
     /**
-     * @param $arr Array of sanitized html
+     * @param $arr array Array of sanitized html
      * @return mixed
      */
     static public function breadcrumbs($arr){

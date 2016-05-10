@@ -2,6 +2,8 @@
 
 namespace OLOG\BT;
 
+use OLOG\BT;
+
 class Layout
 {
 static public function render($content_html, $action_obj = null) {
@@ -23,6 +25,20 @@ $h1_str = ''; // TODO: get from action
 </head>
 <body>
 <div class="container">
+    <?php
+    $breadcrumbs_arr = [];
+    
+    if ($action_obj){
+        if ($action_obj instanceof InterfaceBreadcrumbs){
+            $breadcrumbs_arr = $action_obj->currentBreadcrumbsArr();
+        }
+    }
+    
+    if (!empty($breadcrumbs_arr)){
+        echo BT::breadcrumbs($breadcrumbs_arr);
+    }
+
+    ?>
     <div class="page-header">
         <h1><?= $h1_str ?></h1>
     </div>
