@@ -7,8 +7,6 @@ use OLOG\BT;
 class Layout
 {
 static public function render($content_html, $action_obj = null) {
-
-$h1_str = ''; // TODO: get from action
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,10 +25,15 @@ $h1_str = ''; // TODO: get from action
 <div class="container">
     <?php
     $breadcrumbs_arr = [];
+    $h1_str = '';
     
     if ($action_obj){
         if ($action_obj instanceof InterfaceBreadcrumbs){
             $breadcrumbs_arr = $action_obj->currentBreadcrumbsArr();
+        }
+
+        if ($action_obj instanceof InterfacePageTitle){
+            $h1_str = $action_obj->currentPageTitle();
         }
     }
     
