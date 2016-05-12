@@ -19,7 +19,7 @@ class Layout
 
         switch ($layout_code) {
             case LayoutBootstrap::LAYOUT_CODE_BOOTSTRAP:
-                LayoutGentellela::render($content_html, $action_obj);
+                LayoutBootstrap::render($content_html, $action_obj);
                 break;
 
             case LayoutGentellela::LAYOUT_CODE_GENTELLELA:
