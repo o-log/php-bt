@@ -2,11 +2,13 @@
   "name": "o-log/php-bt",
   "description": "PHP wrapper for Bootstrap",
   "require" : {
-    "o-log/php-lib" : "1"
+    "o-log/php-lib" : "1",
+    "o-log/php-router" : "1"
   },
   "autoload" : {
     "psr-0" : {
-      "OLOG" : ""
+      "OLOG" : "",
+      "BTDemo" : ""
     }
   }
 }

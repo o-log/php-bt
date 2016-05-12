@@ -6,8 +6,21 @@ use OLOG\BT;
 
 class LayoutGentellela
 {
+    const LAYOUT_CODE_GENTELLELA = 'LAYOUT_CODE_GENTELLELA';
+    
 static public function render($content_html, $action_obj = null){
-$h1_str = 'TEST TITLE';
+$breadcrumbs_arr = [];
+$h1_str = '';
+
+if ($action_obj){
+    if ($action_obj instanceof InterfaceBreadcrumbs){
+        $breadcrumbs_arr = $action_obj->currentBreadcrumbsArr();
+    }
+
+    if ($action_obj instanceof InterfacePageTitle){
+        $h1_str = $action_obj->currentPageTitle();
+    }
+}
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -223,6 +236,11 @@ $h1_str = 'TEST TITLE';
         <!-- page content -->
         <div class="right_col" role="main">
 
+            <?php
+            if (!empty($breadcrumbs_arr)){
+                echo BT::breadcrumbs($breadcrumbs_arr);
+            }
+            ?>
             <div class="page-title">
                 <div class="title_left">
                     <h3><?= $h1_str ?></h3>
@@ -264,7 +282,6 @@ $h1_str = 'TEST TITLE';
                         </div>
                         -->
                         <div class="x_content">
-
                             <?= $content_html ?>
                         </div>
                     </div>

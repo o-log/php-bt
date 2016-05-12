@@ -2,6 +2,6 @@
 
 require_once '../vendor/autoload.php';
 
-$html = '<div>TEST CONTENT</div>';
+\OLOG\ConfWrapper::assignConfig(\BTDemo\Config::get());
 
-\OLOG\BT\Layout::render($html);
+\OLOG\Router::matchAction(\BTDemo\DemoAction::class, 0);
