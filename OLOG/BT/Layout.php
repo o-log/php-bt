@@ -7,6 +7,9 @@ use OLOG\BT;
 class Layout
 {
 static public function render($content_html, $action_obj = null) {
+    LayoutGentellela::render($content_html, $action_obj);
+    return;
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
