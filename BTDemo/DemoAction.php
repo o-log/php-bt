@@ -19,8 +19,8 @@ class DemoAction implements InterfaceBreadcrumbs, InterfacePageTitle
     }
 
     static public function getUrl(){
-    return '/';
-}
+        return '/';
+    }
     
     public function action(){
         $html = '<div>TEST CONTENT</div>';

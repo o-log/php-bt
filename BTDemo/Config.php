@@ -11,7 +11,10 @@ class Config
         date_default_timezone_set('Europe/Moscow');
 
         $conf['php-bt'] = [
-            'layout_code' => \OLOG\BT\LayoutGentellela::LAYOUT_CODE_GENTELLELA
+            'layout_code' => \OLOG\BT\LayoutGentellela::LAYOUT_CODE_GENTELLELA,
+            'menu_classes_arr' => [
+                BTDemoMenu::class
+            ]
         ];
 
         return $conf;
