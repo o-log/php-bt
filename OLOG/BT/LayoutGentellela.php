@@ -110,7 +110,7 @@ if ($action_obj){
                 <!-- menu prile quick info -->
                 <div class="profile">
                     <div class="profile_pic">
-                        <img src="/bower_components/gentelella/production/images/img.jpg" alt="..." class="img-circle profile_img">
+                        <img src="<?php ImageData::render() ?>" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
@@ -215,7 +215,7 @@ if ($action_obj){
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="/bower_components/gentelella/production/images/img.jpg" alt="">John Doe
+                                <img src="<?php ImageData::render() ?>" alt="">John Doe
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -244,7 +244,7 @@ if ($action_obj){
                                 <li>
                                     <a>
                       <span class="image">
-                                        <img src="/bower_components/gentelella/production/images/img.jpg" alt="Profile Image" />
+                                        <img src="<?php ImageData::render() ?>" alt="Profile Image" />
                                     </span>
                       <span>
                                         <span>John Smith</span>
