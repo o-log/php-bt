@@ -8,10 +8,12 @@ class LayoutGentellela
 {
     const LAYOUT_CODE_GENTELLELA = 'LAYOUT_CODE_GENTELLELA';
     
-static public function render($content_html, $action_obj = null){
-$breadcrumbs_arr = [];
-$h1_str = '';
-    $menu_arr = [];
+    static public function render($content_html, $action_obj = null){
+        $breadcrumbs_arr = [];
+        $h1_str = '';
+        $menu_arr = [];
+        $application_title = ConfWrapper::value('php-bt.application_title', 'Application'); // TODO: key name to constant
+        $user_name = 'User Name';
 
 if ($action_obj){
     if ($action_obj instanceof InterfaceBreadcrumbs){
@@ -22,20 +24,16 @@ if ($action_obj){
         $h1_str = $action_obj->currentPageTitle();
     }
 
-    /*
-    if ($action_obj instanceof InterfaceMenu){
-        $menu_arr = $action_obj->currentMenuArr();
+    if ($action_obj instanceof InterfaceUserName){
+        $user_name = $action_obj->currentUserName();
     }
-    */
+}
 
-
-
-    $menu_classes_arr = ConfWrapper::value('php-bt.menu_classes_arr', []); // TODO: key name to constant
-    if ($menu_classes_arr){
-        foreach ($menu_classes_arr as $menu_class){
-            if (in_array(InterfaceMenu::class, class_implements($menu_class))){
-                $menu_arr = array_merge($menu_arr, $menu_class::menuArr());
-            }
+$menu_classes_arr = ConfWrapper::value('php-bt.menu_classes_arr', []); // TODO: key name to constant
+if ($menu_classes_arr){
+    foreach ($menu_classes_arr as $menu_class){
+        if (in_array(InterfaceMenu::class, class_implements($menu_class))){
+            $menu_arr = array_merge($menu_arr, $menu_class::menuArr());
         }
     }
 }
@@ -45,7 +43,6 @@ if ($action_obj){
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,7 +99,7 @@ if ($action_obj){
             <div class="left_col scroll-view">
 
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>APPLICATION</span></a>
+                    <a href="/" class="site_title"><i class="fa fa-paw"></i> <span><?= $application_title ?></span></a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -114,7 +111,7 @@ if ($action_obj){
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2>John Doe</h2>
+                        <h2><?= $user_name ?></h2>
                     </div>
                 </div>
                 <!-- /menu prile quick info -->
@@ -127,26 +124,6 @@ if ($action_obj){
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
-                            <!--
-                            <li><a href="/"><i class="fa fa-home"></i> Главная</a>
-                            </li>
-                            <li><a><i class="fa fa-edit"></i> Студенты <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="#">Список</a>
-                                    </li>
-                                    <li><a href="#">Поиск</a>
-                                    </li>
-                                    <li><a href="#">Без регистрации</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-desktop"></i> Группы <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="#">Список</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            -->
                             <?php
 
                             /** @var $menu_item_obj MenuItem */
@@ -215,7 +192,7 @@ if ($action_obj){
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="<?php ImageData::render() ?>" alt="">John Doe
+                                <img src="<?php ImageData::render() ?>" alt=""><?= $user_name ?>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -230,7 +207,7 @@ if ($action_obj){
                                 <li>
                                     <a href="javascript:;">Help</a>
                                 </li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                <li><a href="/auth/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </li>
                             </ul>
                         </li>

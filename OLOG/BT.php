@@ -15,6 +15,10 @@ class BT
         return '<a href="' . Sanitize::sanitizeUrl($url). '">' . Sanitize::sanitizeTagContent($text) . '</a>';
     }
 
+    static public function div($html, $attrs = ''){
+        return '<div ' . $attrs . '>' . $html . '</div>';
+    }
+
     /**
      * @param $arr array Array of sanitized html
      * @return mixed

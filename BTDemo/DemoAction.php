@@ -6,8 +6,13 @@ use OLOG\BT;
 use OLOG\BT\InterfaceBreadcrumbs;
 use OLOG\BT\InterfacePageTitle;
 
-class DemoAction implements InterfaceBreadcrumbs, InterfacePageTitle
+class DemoAction implements InterfaceBreadcrumbs, InterfacePageTitle, BT\InterfaceUserName
 {
+    public function currentUserName()
+    {
+        return 'Demo User';
+    }
+
     public function currentBreadcrumbsArr()
     {
         return [BT::a('/', 'THIS PAGE')];
