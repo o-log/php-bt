@@ -11,10 +11,10 @@ class BT
      * @param $text
      * @return string
      */
-    static public function a($url, $text){
-        return '<a href="' . Sanitize::sanitizeUrl($url). '">' . Sanitize::sanitizeTagContent($text) . '</a>';
+    static public function a($url, $text, $classes_str = ''){
+        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url). '">' . Sanitize::sanitizeTagContent($text) . '</a>';
     }
-
+    
     static public function div($html, $attrs = ''){
         return '<div ' . $attrs . '>' . $html . '</div>';
     }
