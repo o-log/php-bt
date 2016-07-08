@@ -15,19 +15,10 @@ class Layout
 {
     static public function render($content_html, $action_obj = null)
     {
-        $layout_code = ConfWrapper::value('php-bt.layout_code', LayoutBootstrap::LAYOUT_CODE_BOOTSTRAP);
 
-        switch ($layout_code) {
-            case LayoutBootstrap::LAYOUT_CODE_BOOTSTRAP:
-                LayoutBootstrap::render($content_html, $action_obj);
-                break;
+		$layout_theme = ConfWrapper::getOptionalValue('php-bt.layout_theme', LayoutBootstrap::class);
+		\OLOG\Assert::assert(is_callable([$layout_theme, 'render'], false), 'Функция render отсутствует в классе');
+		$layout_theme::render($content_html, $action_obj);
 
-            case LayoutGentellela::LAYOUT_CODE_GENTELLELA:
-                LayoutGentellela::render($content_html, $action_obj);
-                break;
-
-            default:
-                throw new \Exception('unknown layout code');
-        }
     }
 }

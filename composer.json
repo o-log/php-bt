@@ -3,12 +3,19 @@
   "description": "PHP wrapper for Bootstrap",
   "require" : {
     "o-log/php-lib" : "1.*",
-    "o-log/php-router" : "1.*"
+    "o-log/php-router" : "1.*",
+    "o-log/php-gentelella" : "dev-master"
   },
   "autoload" : {
     "psr-0" : {
       "OLOG" : "",
       "BTDemo" : ""
     }
-  }
+  },
+  "repositories" : [
+    {
+      "type" : "git",
+      "url" : "https://github.com/o-log/php-gentelella"
+    }
+  ]
 }

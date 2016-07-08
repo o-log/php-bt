@@ -6,7 +6,6 @@ use OLOG\BT;
 
 class LayoutBootstrap
 {
-    const LAYOUT_CODE_BOOTSTRAP = 'LAYOUT_CODE_BOOTSTRAP';
     
 static public function render($content_html, $action_obj = null) {
 ?><!DOCTYPE html>
