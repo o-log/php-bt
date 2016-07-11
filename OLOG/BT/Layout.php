@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ologinov
- * Date: 12.05.16
- * Time: 21:52
- */
 
 namespace OLOG\BT;
-
 
 use OLOG\ConfWrapper;
 
