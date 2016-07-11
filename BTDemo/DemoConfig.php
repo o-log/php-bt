@@ -2,7 +2,7 @@
 
 namespace BTDemo;
 
-class Config
+class DemoConfig
 {
     public static function get()
     {
@@ -12,7 +12,7 @@ class Config
 
         $conf['php-bt'] = [
             'menu_classes_arr' => [
-                BTDemoMenu::class
+                DemoMenu::class
             ]
         ];
 
