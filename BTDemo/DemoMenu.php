@@ -4,7 +4,7 @@ namespace BTDemo;
 
 use OLOG\BT;
 
-class BTDemoMenu implements BT\InterfaceMenu
+class DemoMenu implements BT\InterfaceMenu
 {
     static public function menuArr(){
         return [

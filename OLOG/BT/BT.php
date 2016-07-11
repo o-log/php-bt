@@ -1,6 +1,6 @@
 <?php
 
-namespace OLOG;
+namespace OLOG\BT;
 
 use OLOG\Sanitize;
 
@@ -78,6 +78,5 @@ class BT
         $uri_no_getform = $parts[0];
         return $uri_no_getform;
     }
-
-
+	
 }

@@ -2,11 +2,12 @@
 
 namespace BTDemo;
 
-use OLOG\BT;
+use OLOG\BT\BT;
 use OLOG\BT\InterfaceBreadcrumbs;
 use OLOG\BT\InterfacePageTitle;
+use OLOG\BT\InterfaceUserName;
 
-class DemoAction implements InterfaceBreadcrumbs, InterfacePageTitle, BT\InterfaceUserName
+class DemoAction implements InterfaceBreadcrumbs, InterfacePageTitle, InterfaceUserName
 {
     public function currentUserName()
     {

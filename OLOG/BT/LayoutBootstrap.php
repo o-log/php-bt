@@ -2,7 +2,7 @@
 
 namespace OLOG\BT;
 
-use OLOG\BT;
+use OLOG\BT\BT;
 
 class LayoutBootstrap
 {

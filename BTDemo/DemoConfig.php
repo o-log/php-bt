@@ -10,7 +10,8 @@ class DemoConfig
         header('Content-Type: text/html; charset=utf-8');
         date_default_timezone_set('Europe/Moscow');
 
-        $conf['php-bt'] = [
+        $conf[\OLOG\BT\BTConstants::MODULE_NAME] = [
+			'layout_class_name' => \OLOG\BT\LayoutBootstrap::class,
             'menu_classes_arr' => [
                 DemoMenu::class
             ]
