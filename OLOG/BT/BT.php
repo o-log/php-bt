@@ -78,5 +78,15 @@ class BT
         $uri_no_getform = $parts[0];
         return $uri_no_getform;
     }
-	
+
+    static public function progress($value)
+    {
+        $value = intval($value);
+
+        $html = '<div class="progress">';
+        $html .= '<div class="progress-bar" role="progressbar" aria-valuenow="' . $value . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $value . '%">';
+        $html .='</div></div>';
+
+        return $html;
+    }
 }
