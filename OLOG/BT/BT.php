@@ -11,11 +11,13 @@ class BT
      * @param $text
      * @return string
      */
-    static public function a($url, $text, $classes_str = ''){
-        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url). '">' . Sanitize::sanitizeTagContent($text) . '</a>';
+    static public function a($url, $text, $classes_str = '')
+    {
+        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '">' . Sanitize::sanitizeTagContent($text) . '</a>';
     }
-    
-    static public function div($html, $attrs = ''){
+
+    static public function div($html, $attrs = '')
+    {
         return '<div ' . $attrs . '>' . $html . '</div>';
     }
 
@@ -23,12 +25,13 @@ class BT
      * @param $arr array Array of sanitized html
      * @return mixed
      */
-    static public function breadcrumbs($arr){
+    static public function breadcrumbs($arr)
+    {
         ob_start();
 
         echo '<ol class="breadcrumb">';
 
-        foreach ($arr as $html){
+        foreach ($arr as $html) {
             echo '<li class="active">' . $html . '</li>';
         }
 
@@ -51,7 +54,8 @@ class BT
         return $html;
     }
 
-    static public function tabHtml($text, $match_url, $link_url){
+    static public function tabHtml($text, $match_url, $link_url)
+    {
         $classes = '';
 
         // TODO: код взят из Router::match3() - использовать общую реализацию?
@@ -61,6 +65,10 @@ class BT
         $current_url = self::uri_no_getform(); // TODO: use common request reader
         if (preg_match($url_regexp, $current_url, $matches_arr)) {
             $classes .= ' active ';
+        }
+
+        if ($link_url == '') {
+            $classes .= ' disabled ';
         }
 
         $html = '';
@@ -78,5 +86,5 @@ class BT
         $uri_no_getform = $parts[0];
         return $uri_no_getform;
     }
-	
+
 }
