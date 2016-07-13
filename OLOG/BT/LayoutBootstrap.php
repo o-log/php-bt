@@ -2,7 +2,7 @@
 
 namespace OLOG\BT;
 
-use OLOG\BT\BT;
+use OLOG\ConfWrapper;
 
 class LayoutBootstrap
 {
@@ -25,19 +25,19 @@ static public function render($content_html, $action_obj = null) {
 <body>
 <div class="container">
     <?php
-    $breadcrumbs_arr = [];
     $h1_str = '';
-    
+    $breadcrumbs_arr = ConfWrapper::getOptionalValue(\OLOG\BT\BTConstants::MODULE_NAME . '.' . \OLOG\BT\BTConstants::BREADCRUMBS_PREFIX_ARR, []);
+
     if ($action_obj){
         if ($action_obj instanceof InterfaceBreadcrumbs){
-            $breadcrumbs_arr = $action_obj->currentBreadcrumbsArr();
+            $breadcrumbs_arr = array_merge($breadcrumbs_arr, $action_obj->currentBreadcrumbsArr());
         }
 
         if ($action_obj instanceof InterfacePageTitle){
             $h1_str = $action_obj->currentPageTitle();
         }
     }
-    
+
     if (!empty($breadcrumbs_arr)){
         echo BT::breadcrumbs($breadcrumbs_arr);
     }
