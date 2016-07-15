@@ -7,20 +7,20 @@ class MenuItem
 	protected $text;
 	protected $url;
 	protected $children_arr;
-	protected $icon;
+	protected $icon_classes_str;
 
-	public function __construct($text, $url, $children_arr = null, $icon = '')
+	public function __construct($text, $url, $children_arr = null, $icon_classes_str = '')
 	{
 		$this->setText($text);
 		$this->setUrl($url);
 		$this->setChildrenArr($children_arr);
-		$this->setIcon($icon);
+		$this->setIconClassesStr($icon_classes_str);
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getIcon()
+	public function getIconClassesStr()
 	{
 		return $this->children_arr;
 	}
@@ -28,9 +28,9 @@ class MenuItem
 	/**
 	 * @param mixed $icon
 	 */
-	public function setIcon($icon)
+	public function setIconClassesStr($icon_classes_str)
 	{
-		$this->icon = $icon;
+		$this->icon_classes_str = $icon_classes_str;
 	}
 
 	/**
