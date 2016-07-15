@@ -22,11 +22,11 @@ class MenuItem
 	 */
 	public function getIconClassesStr()
 	{
-		return $this->children_arr;
+		return $this->icon_classes_str;
 	}
 
 	/**
-	 * @param mixed $icon
+	 * @param mixed $icon_classes_str
 	 */
 	public function setIconClassesStr($icon_classes_str)
 	{
