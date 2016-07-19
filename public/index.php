@@ -2,6 +2,6 @@
 
 require_once '../vendor/autoload.php';
 
-\OLOG\ConfWrapper::assignConfig(\BTDemo\DemoConfig::get());
+\BTDemo\DemoConfig::init();
 
 \OLOG\Router::matchAction(\BTDemo\DemoAction::class, 0);
