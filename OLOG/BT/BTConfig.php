@@ -7,6 +7,7 @@ class BTConfig
     static protected $layout_class_name = LayoutBootstrap::class;
     static protected $breadcrumbs_prefix_arr = [];
     static protected $menu_classes_arr = [];
+    static protected $application_title = 'Application';
 
     /**
      * @return mixed
@@ -55,4 +56,22 @@ class BTConfig
     {
         self::$menu_classes_arr = $menu_classes_arr;
     }
+
+    /**
+     * @return string
+     */
+    public static function getApplicationTitle()
+    {
+        return self::$application_title;
+    }
+
+    /**
+     * @param string $application_title
+     */
+    public static function setApplicationTitle($application_title)
+    {
+        self::$application_title = $application_title;
+    }
+
+
 }
