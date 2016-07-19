@@ -6,6 +6,7 @@ class BTConfig
 {
     static protected $layout_class_name = LayoutBootstrap::class;
     static protected $breadcrumbs_prefix_arr = [];
+    static protected $menu_classes_arr = [];
 
     /**
      * @return mixed
@@ -37,5 +38,21 @@ class BTConfig
     public static function setBreadcrumbsPrefixArr($breadcrumbs_prefix_arr)
     {
         self::$breadcrumbs_prefix_arr = $breadcrumbs_prefix_arr;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getMenuClassesArr()
+    {
+        return self::$menu_classes_arr;
+    }
+
+    /**
+     * @param array $menu_classes_arr
+     */
+    public static function setMenuClassesArr($menu_classes_arr)
+    {
+        self::$menu_classes_arr = $menu_classes_arr;
     }
 }
