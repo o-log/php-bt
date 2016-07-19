@@ -43,7 +43,7 @@ class BT
     static public function tabsHtml(array $tabs_arr)
     {
         $html = '';
-        $html .= '<ul class="nav nav-tabs">';
+        $html .= '<ul class="nav nav-tabs" style="margin-bottom: 20px;">';
 
         foreach ($tabs_arr as $tab_html) {
             $html .= $tab_html;
