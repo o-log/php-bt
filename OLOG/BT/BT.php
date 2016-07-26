@@ -6,6 +6,24 @@ use OLOG\Sanitize;
 
 class BT
 {
+    static public function modal($modal_element_id, $title, $contents_html = ''){
+        $html = '<div class="modal fade" id="' . $modal_element_id . '" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+		<h4 class="modal-title">' . $title . '</h4>
+		</div>
+		<div class="modal-body">' . $contents_html . '</div>
+		</div>
+		</div>
+		</div>';
+
+        return $html;
+    }
+
     /**
      * @param $url
      * @param $text
