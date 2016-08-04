@@ -58,10 +58,15 @@ class BT
         return ob_get_clean();
     }
 
-    static public function tabsHtml(array $tabs_arr)
+    static public function tabsHtml(array $tabs_arr, $classes_str = null)
     {
         $html = '';
-        $html .= '<ul class="nav nav-tabs">';
+
+        if (is_null($classes_str)){
+            $classes_str = 'nav nav-tabs';
+        }
+
+        $html .= '<ul class="' . Sanitize::sanitizeAttrValue($classes_str) . '">';
 
         foreach ($tabs_arr as $tab_html) {
             $html .= $tab_html;
