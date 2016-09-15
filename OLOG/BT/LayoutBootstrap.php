@@ -6,6 +6,16 @@ class LayoutBootstrap
 {
     
 static public function render($content_html, $action_obj = null) {
+
+    $page_toolbar_html = '';
+
+    // запрашиваем до начала вывода на страницу, потому что там может редирект или какая-то еще работа с хидерами
+    if ($action_obj) {
+        if ($action_obj instanceof InterfacePageToolbarHtml) {
+            $page_toolbar_html = $action_obj->pageToolbarHtml();
+        }
+    }
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +55,14 @@ static public function render($content_html, $action_obj = null) {
     <div class="page-header">
         <h1><?= $h1_str ?></h1>
     </div>
-    <?= $content_html ?>
+    <?php
+
+    if ($page_toolbar_html != ''){
+        echo '<div>' . $page_toolbar_html . '</div>';
+    }
+
+    echo $content_html;
+    ?>
 </div>
 </body>
 </html>
