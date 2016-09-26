@@ -6,6 +6,49 @@ use OLOG\Sanitize;
 
 class BT
 {
+    public static function row($html) {
+        if (is_callable($html)) {
+            ob_start();
+            $html();
+            $html = ob_get_clean();
+        }
+
+        $class = ' class="row" ';
+        return  '<div ' . $class . ' >' . $html . '</div>';
+    }
+
+    public static function panel($heading_html, $html) {
+        if (is_callable($html)) {
+            ob_start();
+            $html();
+            $html = ob_get_clean();
+        }
+
+        return  '<div class="panel panel-default" ><div class="panel-heading">' . $heading_html  . '</div><div class="panel-body">' . $html . '</div></div>';
+    }
+
+    public static function colLg6($html) {
+        if (is_callable($html)) {
+            ob_start();
+            $html();
+            $html = ob_get_clean();
+        }
+
+        $class = ' class="col-lg-6" ';
+        return  '<div ' . $class . ' >' . $html . '</div>';
+    }
+
+    public static function colSm6($html) {
+        if (is_callable($html)) {
+            ob_start();
+            $html();
+            $html = ob_get_clean();
+        }
+
+        $class = ' class="col-sm-6" ';
+        return  '<div ' . $class . ' >' . $html . '</div>';
+    }
+
     static public function modal($modal_element_id, $title, $contents_html = ''){
         $html = '<div class="modal fade" id="' . $modal_element_id . '" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
 		<div class="modal-dialog" role="document">
