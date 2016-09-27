@@ -5,11 +5,11 @@ namespace OLOG\BT;
 /**
  * Интерфейс для получения лого страницы
  */
-interface InterfacePageLogo
+interface IntefacePageLogoHtml
 {
     /**
      * Возвращает html строку, содержащую лого страницы
      * @return string
      */
-    public function getLogoImg();
+    public function pageLogoHtml();
 }
