@@ -8,7 +8,7 @@ trait PageBreadcrumbsTrait {
      * @param $action_obj
      * @return string
      */
-    public function pageTitle($action_obj) {
+    public static function pageTitle($action_obj) {
         $action_title = '#NO_TITLE#';
         if ($action_obj instanceof InterfacePageTitle) {
             $action_title = $action_obj->currentPageTitle();
@@ -20,7 +20,7 @@ trait PageBreadcrumbsTrait {
      * @param $action_obj
      * @return string
      */
-    public function pageUrl($action_obj) {
+    public static function pageUrl($action_obj) {
         $action_url = '#NO_URL#';
         if ($action_obj instanceof InterfaceAction) {
             $action_url = $action_obj->url();
