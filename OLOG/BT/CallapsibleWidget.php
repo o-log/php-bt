@@ -4,7 +4,7 @@ namespace OLOG\BT;
 
 class CallapsibleWidget
 {
-    public static function div($text, $html) {
+    public static function buttonAndCollapse($text, $html) {
         if (is_callable($html)) {
             $html = $html();
         }
