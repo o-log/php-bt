@@ -1,9 +1,20 @@
 {
   "name": "o-log/php-bt",
   "description": "PHP wrapper for Bootstrap",
+  "repositories" : [
+    {
+      "type": "git",
+      "url": "https://github.com/o-log/php-html"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/o-log/php-layouts"
+    }
+  ],
   "require" : {
     "o-log/php-lib" : "1.*",
-    "o-log/php-router" : "1.*"
+    "o-log/php-router" : "1.*",
+    "o-log/php-layouts" : "1.*"
   },
   "autoload" : {
     "psr-0" : {

@@ -2,7 +2,10 @@
 
 namespace OLOG\BT;
 
-class LayoutBootstrap
+use OLOG\Layouts\InterfaceLayout;
+
+class LayoutBootstrap implements
+    InterfaceLayout
 {
     
 static public function render($content_html, $action_obj = null) {
