@@ -45,6 +45,7 @@ if ($action_obj) {
 	$menu_arr = [];
 	$menu_classes_arr = BTConfig::getMenuClassesArr();
 
+	/*
 	if ($menu_classes_arr) {
 		foreach ($menu_classes_arr as $menu_class) {
 			if (in_array(\OLOG\BT\InterfaceMenu::class, class_implements($menu_class))) {
@@ -55,6 +56,7 @@ if ($action_obj) {
 			}
 		}
 	}
+	*/
 
 	?>
 	<nav class="navbar navbar-inverse">
