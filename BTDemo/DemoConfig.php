@@ -13,7 +13,7 @@ class DemoConfig
         date_default_timezone_set('Europe/Moscow');
 
         BTConfig::setLayoutClassName(\OLOG\BT\LayoutBootstrap::class);
-
+	    BTConfig::setMenuClassesArr([DemoMenu::class]);
         BTConfig::setBreadcrumbsPrefixArr([\OLOG\BT\BT::a(\BTDemo\DemoAction::getUrl(), '', 'glyphicon glyphicon-home')]);
 
     }
