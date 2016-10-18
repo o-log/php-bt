@@ -47,10 +47,10 @@ if ($action_obj) {
 
 	if ($menu_classes_arr) {
 		foreach ($menu_classes_arr as $menu_class) {
-			if (in_array(InterfaceMenu::class, class_implements($menu_class))) {
+			if (in_array(\OLOG\BT\InterfaceMenu::class, class_implements($menu_class))) {
 				$menu_arr = array_merge($menu_arr, $menu_class::menuArr());
 			}
-			if (in_array(InterfaceMenu::class, class_implements($menu_class))) {
+			if (in_array(\OLOG\Layouts\InterfaceMenu::class, class_implements($menu_class))) {
 				$menu_arr = array_merge($menu_arr, $menu_class::menuArr());
 			}
 		}
