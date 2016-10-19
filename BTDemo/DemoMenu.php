@@ -2,20 +2,21 @@
 
 namespace BTDemo;
 
-use OLOG\BT;
+use OLOG\Layouts\InterfaceMenu;
+use OLOG\Layouts\MenuItem;
 
-class DemoMenu implements BT\InterfaceMenu
+class DemoMenu implements InterfaceMenu
 {
     static public function menuArr(){
         return [
-            new BT\MenuItem('123', '/'),
-            new BT\MenuItem('234', '', [
-                new BT\MenuItem('345', '/2'),
-                new BT\MenuItem('456', '/3')
+            new MenuItem('123', '/'),
+            new MenuItem('234', '', [
+                new MenuItem('345', '/2'),
+                new MenuItem('456', '/3')
             ]),
-            new BT\MenuItem('567', '', [
-                new BT\MenuItem('678', '/4'),
-                new BT\MenuItem('789', '/5')
+            new MenuItem('567', '', [
+                new MenuItem('678', '/4'),
+                new MenuItem('789', '/5')
             ])
         ];
     }

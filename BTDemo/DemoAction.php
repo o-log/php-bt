@@ -4,14 +4,12 @@ namespace BTDemo;
 
 use OLOG\BT\BT;
 use OLOG\BT\InterfaceBreadcrumbs;
-use OLOG\BT\InterfacePageTitle;
 use OLOG\BT\InterfacePageToolbarHtml;
-use OLOG\BT\InterfaceUserName;
+use OLOG\Layouts\InterfacePageTitle;
 
 class DemoAction implements
     InterfaceBreadcrumbs,
     InterfacePageTitle,
-    InterfaceUserName,
     InterfacePageToolbarHtml
 {
     public function pageToolbarHtml()
@@ -29,7 +27,7 @@ class DemoAction implements
         return [BT::a('/', 'THIS PAGE')];
     }
 
-    public function currentPageTitle()
+    public function pageTitle()
     {
         return 'TEST PAGE TITLE';
     }

@@ -3,7 +3,10 @@
 namespace OLOG\BT;
 
 use OLOG\Layouts\InterfaceLayout;
-use OLOG\Layouts\InterfaceMenu;use OLOG\Sanitize;
+use OLOG\Layouts\InterfaceMenu;
+use OLOG\Layouts\InterfacePageTitle;
+use OLOG\Layouts\MenuItem;
+use OLOG\Sanitize;
 
 class LayoutBootstrap implements
 	InterfaceLayout
@@ -90,7 +93,7 @@ if ($action_obj) {
 								</a>
 								<ul class="dropdown-menu">
 									<?php
-									/** @var  $child_menu_item_obj MenuItem */
+									/** @var  $child_menu_item_obj \OLOG\Layouts\MenuItem */
 									foreach ($children_arr as $child_menu_item_obj) {
 										\OLOG\Assert::assert($child_menu_item_obj instanceof \OLOG\Layouts\MenuItem);
 
@@ -139,7 +142,7 @@ if ($action_obj) {
 		}
 
 		if ($action_obj instanceof InterfacePageTitle) {
-			$h1_str = $action_obj->currentPageTitle();
+			$h1_str = $action_obj->pageTitle();
 		}
 	}
 
