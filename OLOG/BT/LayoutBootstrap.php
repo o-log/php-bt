@@ -2,10 +2,12 @@
 
 namespace OLOG\BT;
 
+use OLOG\HTML;
+use OLOG\InterfaceAction;
 use OLOG\Layouts\InterfaceLayout;
 use OLOG\Layouts\InterfaceMenu;
 use OLOG\Layouts\InterfacePageTitle;
-use OLOG\Layouts\MenuItem;
+use OLOG\Layouts\InterfaceTopActionObj;
 use OLOG\Sanitize;
 
 class LayoutBootstrap implements
@@ -140,6 +142,33 @@ if ($action_obj) {
 		if ($action_obj instanceof InterfaceBreadcrumbs) {
 			$breadcrumbs_arr = array_merge($breadcrumbs_arr, $action_obj->currentBreadcrumbsArr());
 		}
+
+		if ($action_obj instanceof InterfaceTopActionObj) {
+			$top_action_obj = $action_obj->topActionObj();
+			$extra_breadcrumbs_arr = [];
+
+			while ($top_action_obj){
+				$top_action_title = '#NO_TITLE#';
+				if ($top_action_obj instanceof InterfacePageTitle){
+					$top_action_title = $top_action_obj->pageTitle();
+				}
+
+				$top_action_url = '#NO_URL#';
+				if ($top_action_obj instanceof InterfaceAction){
+					$top_action_url = $top_action_obj->url();
+				}
+
+				array_unshift($extra_breadcrumbs_arr, HTML::a($top_action_url, $top_action_title));
+
+				$top_action_obj = null;
+				if ($top_action_obj instanceof InterfaceTopActionObj) {
+					$top_action_obj = $top_action_obj->topActionObj();
+				}
+			}
+
+			$breadcrumbs_arr = array_merge($breadcrumbs_arr, $extra_breadcrumbs_arr);
+		}
+
 
 		if ($action_obj instanceof InterfacePageTitle) {
 			$h1_str = $action_obj->pageTitle();
