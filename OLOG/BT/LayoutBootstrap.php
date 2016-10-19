@@ -3,7 +3,7 @@
 namespace OLOG\BT;
 
 use OLOG\Layouts\InterfaceLayout;
-use OLOG\Sanitize;
+use OLOG\Layouts\InterfaceMenu;use OLOG\Sanitize;
 
 class LayoutBootstrap implements
 	InterfaceLayout
@@ -40,23 +40,13 @@ if ($action_obj) {
 <body>
 <div class="container">
 	<?php
-	$application_title = BTConfig::getApplicationTitle();
+	//$application_title = BTConfig::getApplicationTitle();
+	$application_title = 'Home';
 
-	$menu_arr = [];
-	$menu_classes_arr = BTConfig::getMenuClassesArr();
-
-	/*
-	if ($menu_classes_arr) {
-		foreach ($menu_classes_arr as $menu_class) {
-			if (in_array(\OLOG\BT\InterfaceMenu::class, class_implements($menu_class))) {
-				$menu_arr = array_merge($menu_arr, $menu_class::menuArr());
-			}
-			if (in_array(\OLOG\Layouts\InterfaceMenu::class, class_implements($menu_class))) {
-				$menu_arr = array_merge($menu_arr, $menu_class::menuArr());
-			}
-		}
+	$menu_items_arr = [];
+	if ($action_obj instanceof InterfaceMenu){
+		$menu_items_arr = $action_obj::menuArr();
 	}
-	*/
 
 	?>
 	<nav class="navbar navbar-inverse">
@@ -77,113 +67,58 @@ if ($action_obj) {
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<?php
-					foreach ($menu_arr as $menu_item_obj) {
-						if ($menu_item_obj instanceof \OLOG\BT\MenuItem) {
-							$children_arr = $menu_item_obj->getChildrenArr();
+					foreach ($menu_items_arr as $menu_item_obj) {
+						\OLOG\Assert::assert($menu_item_obj instanceof \OLOG\Layouts\MenuItem);
 
-							$href = 'href="#"';
-							if ($menu_item_obj->getUrl()) {
-								$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
-							}
+						$children_arr = $menu_item_obj->getChildrenArr();
 
-							$icon = '';
-							if ($menu_item_obj->getIconClassesStr()) {
-								$icon = '<i class="' . $menu_item_obj->getIconClassesStr() . '"></i> ';
-							}
+						$href = 'href="#"';
+						if ($menu_item_obj->getUrl()) {
+							$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
+						}
 
-							if (count($children_arr)) {
-								?>
-								<li class="dropdown">
-									<a <?= $href ?> class="dropdown-toggle" data-toggle="dropdown" role="button"
-									                aria-haspopup="true" aria-expanded="false">
-										<?= $icon . Sanitize::sanitizeTagContent($menu_item_obj->getText()) ?> <span
-											class="caret"></span>
-									</a>
-									<ul class="dropdown-menu">
-										<?php
-										/** @var  $child_menu_item_obj MenuItem */
-										foreach ($children_arr as $child_menu_item_obj) {
-											$children_href = '';
-											if ($child_menu_item_obj->getUrl()) {
-												$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
-											}
+						$icon = '';
+						if ($menu_item_obj->getIconClassesStr()) {
+							$icon = '<i class="' . $menu_item_obj->getIconClassesStr() . '"></i> ';
+						}
 
-											$children_icon = '';
-											if ($child_menu_item_obj->getIconClassesStr()) {
-												$children_icon = '<i class="' . $child_menu_item_obj->getIconClassesStr() . '"></i> ';
-											}
-											?>
-											<li>
-												<a <?= $children_href ?>><?= $children_icon . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) ?></a>
-											</li>
-											<?php
+						if (count($children_arr)) {
+							?>
+							<li class="dropdown">
+								<a <?= $href ?> class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<?= $icon . Sanitize::sanitizeTagContent($menu_item_obj->getText()) ?> <span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<?php
+									/** @var  $child_menu_item_obj MenuItem */
+									foreach ($children_arr as $child_menu_item_obj) {
+										\OLOG\Assert::assert($child_menu_item_obj instanceof \OLOG\Layouts\MenuItem);
+
+										$children_href = '';
+										if ($child_menu_item_obj->getUrl()) {
+											$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
+										}
+
+										$children_icon = '';
+										if ($child_menu_item_obj->getIconClassesStr()) {
+											$children_icon = '<i class="' . $child_menu_item_obj->getIconClassesStr() . '"></i> ';
 										}
 										?>
-									</ul>
-								</li>
-								<?php
-							} else {
-								?>
-								<li>
-									<a <?= $href ?>><?= $icon . Sanitize::sanitizeTagContent($menu_item_obj->getText()) ?></a>
-								</li>
-								<?php
-							}
-						}
-						elseif ($menu_item_obj instanceof \OLOG\Layouts\MenuItem) {
-							$children_arr = $menu_item_obj->getChildrenArr();
-
-							$href = 'href="#"';
-							if ($menu_item_obj->getUrl()) {
-								$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
-							}
-
-							$icon = '';
-							if ($menu_item_obj->getIconClassesStr()) {
-								$icon = '<i class="' . $menu_item_obj->getIconClassesStr() . '"></i> ';
-							}
-
-							if (count($children_arr)) {
-								?>
-								<li class="dropdown">
-									<a <?= $href ?> class="dropdown-toggle" data-toggle="dropdown" role="button"
-									                aria-haspopup="true" aria-expanded="false">
-										<?= $icon . Sanitize::sanitizeTagContent($menu_item_obj->getText()) ?> <span
-											class="caret"></span>
-									</a>
-									<ul class="dropdown-menu">
+										<li>
+											<a <?= $children_href ?>><?= $children_icon . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) ?></a>
+										</li>
 										<?php
-										/** @var  $child_menu_item_obj MenuItem */
-										foreach ($children_arr as $child_menu_item_obj) {
-											$children_href = '';
-											if ($child_menu_item_obj->getUrl()) {
-												$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
-											}
-
-											$children_icon = '';
-											if ($child_menu_item_obj->getIconClassesStr()) {
-												$children_icon = '<i class="' . $child_menu_item_obj->getIconClassesStr() . '"></i> ';
-											}
-											?>
-											<li>
-												<a <?= $children_href ?>><?= $children_icon . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) ?></a>
-											</li>
-											<?php
-										}
-										?>
-									</ul>
-								</li>
-								<?php
-							} else {
-								?>
-								<li>
-									<a <?= $href ?>><?= $icon . Sanitize::sanitizeTagContent($menu_item_obj->getText()) ?></a>
-								</li>
-								<?php
-							}
-						}
-						else {
-							throw new \Exception('unsupported menu item object');
+									}
+									?>
+								</ul>
+							</li>
+							<?php
+						} else {
+							?>
+							<li>
+								<a <?= $href ?>><?= $icon . Sanitize::sanitizeTagContent($menu_item_obj->getText()) ?></a>
+							</li>
+							<?php
 						}
 					}
 					?>
