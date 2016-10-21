@@ -18,7 +18,7 @@ $page_toolbar_html = '';
 
 // запрашиваем до начала вывода на страницу, потому что там может редирект или какая-то еще работа с хидерами
 if ($action_obj) {
-	if ($action_obj instanceof InterfacePageToolbarHtml) {
+	if ($action_obj instanceof \OLOG\Layouts\InterfacePageToolbarHtml) {
 		$page_toolbar_html = $action_obj->pageToolbarHtml();
 	}
 }
@@ -134,12 +134,15 @@ if ($action_obj) {
 
 	$h1_str = '';
 	//$breadcrumbs_arr = ConfWrapper::getOptionalValue(\OLOG\BT\BTConstants::MODULE_NAME . '.' . \OLOG\BT\BTConstants::BREADCRUMBS_PREFIX_ARR, []);
-	$breadcrumbs_arr = BTConfig::getBreadcrumbsPrefixArr();
+	//$breadcrumbs_arr = BTConfig::getBreadcrumbsPrefixArr();
+	$breadcrumbs_arr = [];
 
 	if ($action_obj) {
+		/*
 		if ($action_obj instanceof InterfaceBreadcrumbs) {
 			$breadcrumbs_arr = array_merge($breadcrumbs_arr, $action_obj->currentBreadcrumbsArr());
 		}
+		*/
 
 		if ($action_obj instanceof \OLOG\Layouts\InterfaceTopActionObj) {
 			$top_action_obj = $action_obj->topActionObj();

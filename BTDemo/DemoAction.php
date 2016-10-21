@@ -2,13 +2,11 @@
 
 namespace BTDemo;
 
-use OLOG\BT\BT;
-use OLOG\BT\InterfaceBreadcrumbs;
-use OLOG\BT\InterfacePageToolbarHtml;
+use OLOG\Layouts\AdminLayoutSelector;
 use OLOG\Layouts\InterfacePageTitle;
+use OLOG\Layouts\InterfacePageToolbarHtml;
 
 class DemoAction implements
-    InterfaceBreadcrumbs,
     InterfacePageTitle,
     InterfacePageToolbarHtml
 {
@@ -20,11 +18,6 @@ class DemoAction implements
     public function currentUserName()
     {
         return 'Demo User';
-    }
-
-    public function currentBreadcrumbsArr()
-    {
-        return [BT::a('/', 'THIS PAGE')];
     }
 
     public function pageTitle()
@@ -39,6 +32,6 @@ class DemoAction implements
     public function action(){
         $html = '<div>TEST CONTENT</div>';
 
-        \OLOG\BT\Layout::render($html, $this);
+        AdminLayoutSelector::render($html, $this);
     }
 }
