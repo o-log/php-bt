@@ -72,9 +72,13 @@ class BT
      * @param $text
      * @return string
      */
-    static public function a($url, $text, $classes_str = '')
+    static public function a($url, $text, $classes_str = '', $in_new_browser_tab = false)
     {
-        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '">' . Sanitize::sanitizeTagContent($text) . '</a>';
+        $target = '';
+        if ($in_new_browser_tab) {
+            $target = ' target="_blank" ';
+        }
+        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '"' . $target . '>' . Sanitize::sanitizeTagContent($text) . '</a>';
     }
 
     static public function div($html, $attrs = '')
@@ -120,7 +124,7 @@ class BT
         return $html;
     }
 
-    static public function tabHtml($text, $match_url, $link_url)
+    static public function tabHtml($text, $match_url, $link_url, $in_new_browser_tab = false)
     {
         $classes = '';
 
@@ -131,6 +135,7 @@ class BT
         $current_url = self::uri_no_getform(); // TODO: use common request reader
         if (preg_match($url_regexp, $current_url, $matches_arr)) {
             $classes .= ' active ';
+            $in_new_browser_tab =  false;
         }
 
         if ($link_url == '') {
@@ -139,7 +144,7 @@ class BT
 
         $html = '';
         $html .= '<li role="presentation" class="' . Sanitize::sanitizeAttrValue($classes) . '">';
-        $html .= BT::a($link_url, $text);
+        $html .= BT::a($link_url, $text, '', $in_new_browser_tab);
         $html .= '</li>';
 
         return $html;
