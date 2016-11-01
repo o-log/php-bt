@@ -72,13 +72,13 @@ class BT
      * @param $text
      * @return string
      */
-    static public function a($url, $text, $classes_str = '', $in_new_browser_tab = false)
+    static public function a($url, $text, $classes_str = '', $target = false)
     {
-        $target = '';
-        if ($in_new_browser_tab) {
-            $target = ' target="_blank" ';
+        $target_str = '';
+        if ($target) {
+            $target_str = ' target="' . $target . '" ';
         }
-        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '"' . $target . '>' . Sanitize::sanitizeTagContent($text) . '</a>';
+        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '"' . $target_str . '>' . Sanitize::sanitizeTagContent($text) . '</a>';
     }
 
     static public function div($html, $attrs = '')
