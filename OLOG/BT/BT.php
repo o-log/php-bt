@@ -140,6 +140,7 @@ class BT
 
         if ($link_url == '') {
             $classes .= ' disabled ';
+            $target =  '';
         }
 
         $html = '';
