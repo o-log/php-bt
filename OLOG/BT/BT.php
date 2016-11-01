@@ -76,7 +76,7 @@ class BT
     {
         $target_str = '';
         if ($target != '') {
-            $target_str = ' target="' . $target . '" ';
+            $target_str = ' target="' . Sanitize::sanitizeAttrValue($target) . '" ';
         }
         return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '"' . $target_str . '>' . Sanitize::sanitizeTagContent($text) . '</a>';
     }
@@ -135,12 +135,10 @@ class BT
         $current_url = self::uri_no_getform(); // TODO: use common request reader
         if (preg_match($url_regexp, $current_url, $matches_arr)) {
             $classes .= ' active ';
-            $target =  '';
         }
 
         if ($link_url == '') {
             $classes .= ' disabled ';
-            $target =  '';
         }
 
         $html = '';
