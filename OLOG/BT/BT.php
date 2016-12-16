@@ -24,7 +24,17 @@ class BT
             $html = ob_get_clean();
         }
 
-        return  '<div class="panel panel-default" ><div class="panel-heading">' . $heading_html  . '</div><div class="panel-body">' . $html . '</div></div>';
+        $out = '';
+        $out .= '<div class="panel panel-default" >';
+
+        if ($heading_html != '') {
+            $out .= '<div class="panel-heading">' . $heading_html . '</div>';
+        }
+
+        $out .= '<div class="panel-body">' . $html . '</div>';
+        $out .= '</div>';
+
+        return $out;
     }
 
     public static function colLg6($html) {
