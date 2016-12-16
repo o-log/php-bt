@@ -82,9 +82,13 @@ class BT
      * @param $text
      * @return string
      */
-    static public function a($url, $text, $classes_str = '')
+    static public function a($url, $text, $classes_str = '', $target = '')
     {
-        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '">' . Sanitize::sanitizeTagContent($text) . '</a>';
+        $target_str = '';
+        if ($target != '') {
+            $target_str = ' target="' . Sanitize::sanitizeAttrValue($target) . '" ';
+        }
+        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '"' . $target_str . '>' . Sanitize::sanitizeTagContent($text) . '</a>';
     }
 
     static public function div($html, $attrs = '')
@@ -130,7 +134,7 @@ class BT
         return $html;
     }
 
-    static public function tabHtml($text, $match_url, $link_url)
+    static public function tabHtml($text, $match_url, $link_url, $target = '')
     {
         $classes = '';
 
@@ -149,7 +153,7 @@ class BT
 
         $html = '';
         $html .= '<li role="presentation" class="' . Sanitize::sanitizeAttrValue($classes) . '">';
-        $html .= BT::a($link_url, $text);
+        $html .= BT::a($link_url, $text, '', $target);
         $html .= '</li>';
 
         return $html;

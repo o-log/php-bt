@@ -182,14 +182,16 @@ if ($action_obj) {
 
 	?>
 	<div class="page-header">
-		<h1><?= $h1_str ?></h1>
+		<h1>
+			<?= $h1_str ?>
+			<?php
+			if ($page_toolbar_html != '') {
+				echo '<span>' . $page_toolbar_html . '</span>';
+			}
+			?>
+		</h1>
 	</div>
 	<?php
-
-	if ($page_toolbar_html != '') {
-		echo '<div>' . $page_toolbar_html . '</div>';
-	}
-
 	echo $content_html;
 	?>
 </div>
