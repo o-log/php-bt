@@ -4,6 +4,10 @@
   "repositories" : [
     {
       "type": "git",
+      "url": "https://github.com/o-log/php-message"
+    },
+    {
+      "type": "git",
       "url": "https://github.com/o-log/php-html"
     },
     {
@@ -11,10 +15,11 @@
       "url": "https://github.com/o-log/php-layouts"
     }
   ],
+  "require-dev" : {
+    "o-log/php-router" : "2.*"
+  },
   "require" : {
-    "o-log/php-lib" : "1.*",
-    "o-log/php-router" : "1.*",
-    "o-log/php-layouts" : "1.*"
+    "o-log/php-layouts" : "2.*"
   },
   "autoload" : {
     "psr-0" : {

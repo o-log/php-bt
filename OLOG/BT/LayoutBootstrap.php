@@ -2,14 +2,12 @@
 
 namespace OLOG\BT;
 
-use OLOG\HTML;
-use OLOG\InterfaceAction;
-use OLOG\Layouts\InterfaceLayout;
-use OLOG\Layouts\InterfaceMenu;
-use OLOG\Sanitize;
+use OLOG\ActionInterface;use OLOG\HTML;
+use OLOG\Layouts\LayoutInterface;
+use OLOG\Layouts\MenuInterface;use OLOG\Sanitize;
 
 class LayoutBootstrap implements
-	InterfaceLayout
+	LayoutInterface
 {
 
 static public function render($content_html, $action_obj = null) {
@@ -18,7 +16,7 @@ $page_toolbar_html = '';
 
 // запрашиваем до начала вывода на страницу, потому что там может редирект или какая-то еще работа с хидерами
 if ($action_obj) {
-	if ($action_obj instanceof \OLOG\Layouts\InterfacePageToolbarHtml) {
+	if ($action_obj instanceof \OLOG\Layouts\PageToolbarHtmlInterface) {
 		$page_toolbar_html = $action_obj->pageToolbarHtml();
 	}
 }
@@ -47,7 +45,7 @@ if ($action_obj) {
 	$application_title = 'Home';
 
 	$menu_items_arr = [];
-	if ($action_obj instanceof InterfaceMenu){
+	if ($action_obj instanceof MenuInterface){
 		$menu_items_arr = $action_obj::menuArr();
 	}
 
@@ -144,25 +142,25 @@ if ($action_obj) {
 		}
 		*/
 
-		if ($action_obj instanceof \OLOG\Layouts\InterfaceTopActionObj) {
+		if ($action_obj instanceof \OLOG\Layouts\TopActionObjInterface) {
 			$top_action_obj = $action_obj->topActionObj();
 			$extra_breadcrumbs_arr = [];
 
 			while ($top_action_obj){
 				$top_action_title = '#NO_TITLE#';
-				if ($top_action_obj instanceof \OLOG\Layouts\InterfacePageTitle){
+				if ($top_action_obj instanceof \OLOG\Layouts\PageTitleInterface){
 					$top_action_title = $top_action_obj->pageTitle();
 				}
 
 				$top_action_url = '#NO_URL#';
-				if ($top_action_obj instanceof InterfaceAction){
+				if ($top_action_obj instanceof ActionInterface){
 					$top_action_url = $top_action_obj->url();
 				}
 
 				array_unshift($extra_breadcrumbs_arr, HTML::a($top_action_url, $top_action_title));
 
 				$top_action_obj = null;
-				if ($top_action_obj instanceof \OLOG\Layouts\InterfaceTopActionObj) {
+				if ($top_action_obj instanceof \OLOG\Layouts\TopActionObjInterface) {
 					$top_action_obj = $top_action_obj->topActionObj();
 				}
 			}
@@ -171,7 +169,7 @@ if ($action_obj) {
 		}
 
 
-		if ($action_obj instanceof \OLOG\Layouts\InterfacePageTitle) {
+		if ($action_obj instanceof \OLOG\Layouts\PageTitleInterface) {
 			$h1_str = $action_obj->pageTitle();
 		}
 	}

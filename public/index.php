@@ -4,4 +4,4 @@ require_once '../vendor/autoload.php';
 
 \BTDemo\DemoConfig::init();
 
-\OLOG\Router::matchAction(\BTDemo\DemoAction::class, 0);
+\OLOG\Router::action(\BTDemo\DemoAction::class, 0);

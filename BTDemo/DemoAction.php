@@ -2,13 +2,15 @@
 
 namespace BTDemo;
 
+use OLOG\ActionInterface;
 use OLOG\Layouts\AdminLayoutSelector;
-use OLOG\Layouts\InterfacePageTitle;
-use OLOG\Layouts\InterfacePageToolbarHtml;
+use OLOG\Layouts\PageTitleInterface;
+use OLOG\Layouts\PageToolbarHtmlInterface;
 
 class DemoAction implements
-    InterfacePageTitle,
-    InterfacePageToolbarHtml
+    PageTitleInterface,
+    PageToolbarHtmlInterface,
+    ActionInterface
 {
     public function pageToolbarHtml()
     {
@@ -25,7 +27,7 @@ class DemoAction implements
         return 'TEST PAGE TITLE';
     }
 
-    static public function getUrl(){
+    public function url(){
         return '/';
     }
     
