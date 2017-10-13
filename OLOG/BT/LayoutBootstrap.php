@@ -4,7 +4,8 @@ namespace OLOG\BT;
 
 use OLOG\ActionInterface;use OLOG\HTML;
 use OLOG\Layouts\LayoutInterface;
-use OLOG\Layouts\MenuInterface;use OLOG\Sanitize;
+use OLOG\Layouts\MenuInterface;
+use OLOG\Layouts\MenuItem;use OLOG\Layouts\PageTitleInterface;use OLOG\Layouts\PageToolbarHtmlInterface;use OLOG\Layouts\TopActionObjInterface;
 
 class LayoutBootstrap implements
 	LayoutInterface
@@ -16,7 +17,7 @@ $page_toolbar_html = '';
 
 // запрашиваем до начала вывода на страницу, потому что там может редирект или какая-то еще работа с хидерами
 if ($action_obj) {
-	if ($action_obj instanceof \OLOG\Layouts\PageToolbarHtmlInterface) {
+	if ($action_obj instanceof PageToolbarHtmlInterface) {
 		$page_toolbar_html = $action_obj->pageToolbarHtml();
 	}
 }
@@ -69,13 +70,16 @@ if ($action_obj) {
 				<ul class="nav navbar-nav">
 					<?php
 					foreach ($menu_items_arr as $menu_item_obj) {
-						\OLOG\Assert::assert($menu_item_obj instanceof \OLOG\Layouts\MenuItem);
+						//\OLOG\Assert::assert($menu_item_obj instanceof \OLOG\Layouts\MenuItem);
+                        if (!($menu_item_obj instanceof MenuItem)){
+                            throw new \Exception();
+                        }
 
 						$children_arr = $menu_item_obj->getChildrenArr();
 
 						$href = 'href="#"';
 						if ($menu_item_obj->getUrl()) {
-							$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
+							$href = 'href="' . HTML::url($menu_item_obj->getUrl()) . '"';
 						}
 
 						$icon = '';
@@ -87,17 +91,20 @@ if ($action_obj) {
 							?>
 							<li class="dropdown">
 								<a <?= $href ?> class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<?= $icon . Sanitize::sanitizeTagContent($menu_item_obj->getText()) ?> <span class="caret"></span>
+									<?= $icon . HTML::content($menu_item_obj->getText()) ?> <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
 									<?php
 									/** @var  $child_menu_item_obj \OLOG\Layouts\MenuItem */
 									foreach ($children_arr as $child_menu_item_obj) {
-										\OLOG\Assert::assert($child_menu_item_obj instanceof \OLOG\Layouts\MenuItem);
+										//\OLOG\Assert::assert($child_menu_item_obj instanceof \OLOG\Layouts\MenuItem);
+                                        if (!($child_menu_item_obj instanceof MenuItem)){
+                                            throw new \Exception();
+                                        }
 
 										$children_href = '';
 										if ($child_menu_item_obj->getUrl()) {
-											$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
+											$children_href = 'href="' . HTML::url($child_menu_item_obj->getUrl()) . '"';
 										}
 
 										$children_icon = '';
@@ -106,7 +113,7 @@ if ($action_obj) {
 										}
 										?>
 										<li>
-											<a <?= $children_href ?>><?= $children_icon . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) ?></a>
+											<a <?= $children_href ?>><?= $children_icon . HTML::content($child_menu_item_obj->getText()) ?></a>
 										</li>
 										<?php
 									}
@@ -117,7 +124,7 @@ if ($action_obj) {
 						} else {
 							?>
 							<li>
-								<a <?= $href ?>><?= $icon . Sanitize::sanitizeTagContent($menu_item_obj->getText()) ?></a>
+								<a <?= $href ?>><?= $icon . HTML::content($menu_item_obj->getText()) ?></a>
 							</li>
 							<?php
 						}
@@ -142,13 +149,13 @@ if ($action_obj) {
 		}
 		*/
 
-		if ($action_obj instanceof \OLOG\Layouts\TopActionObjInterface) {
+		if ($action_obj instanceof TopActionObjInterface) {
 			$top_action_obj = $action_obj->topActionObj();
 			$extra_breadcrumbs_arr = [];
 
 			while ($top_action_obj){
 				$top_action_title = '#NO_TITLE#';
-				if ($top_action_obj instanceof \OLOG\Layouts\PageTitleInterface){
+				if ($top_action_obj instanceof PageTitleInterface){
 					$top_action_title = $top_action_obj->pageTitle();
 				}
 
@@ -160,7 +167,7 @@ if ($action_obj) {
 				array_unshift($extra_breadcrumbs_arr, HTML::a($top_action_url, $top_action_title));
 
 				$top_action_obj = null;
-				if ($top_action_obj instanceof \OLOG\Layouts\TopActionObjInterface) {
+				if ($top_action_obj instanceof TopActionObjInterface) {
 					$top_action_obj = $top_action_obj->topActionObj();
 				}
 			}
@@ -169,7 +176,7 @@ if ($action_obj) {
 		}
 
 
-		if ($action_obj instanceof \OLOG\Layouts\PageTitleInterface) {
+		if ($action_obj instanceof PageTitleInterface) {
 			$h1_str = $action_obj->pageTitle();
 		}
 	}

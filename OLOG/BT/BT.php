@@ -2,7 +2,7 @@
 
 namespace OLOG\BT;
 
-use OLOG\Sanitize;
+use OLOG\HTML;
 
 class BT
 {
@@ -82,6 +82,7 @@ class BT
      * @param $text
      * @return string
      */
+    /*
     static public function a($url, $text, $classes_str = '', $target = '')
     {
         $target_str = '';
@@ -95,6 +96,7 @@ class BT
     {
         return '<div ' . $attrs . '>' . $html . '</div>';
     }
+    */
 
     /**
      * @param $arr array Array of sanitized html
@@ -123,7 +125,7 @@ class BT
             $classes_str = 'nav nav-tabs';
         }
 
-        $html .= '<ul class="' . Sanitize::sanitizeAttrValue($classes_str) . '">';
+        $html .= '<ul class="' . HTML::attr($classes_str) . '">';
 
         foreach ($tabs_arr as $tab_html) {
             $html .= $tab_html;
@@ -152,8 +154,8 @@ class BT
         }
 
         $html = '';
-        $html .= '<li role="presentation" class="' . Sanitize::sanitizeAttrValue($classes) . '">';
-        $html .= BT::a($link_url, $text, '', $target);
+        $html .= '<li role="presentation" class="' . HTML::attr($classes) . '">';
+        $html .= HTML::tag('a', ['href' => $link_url, 'target' => $target], $text);
         $html .= '</li>';
 
         return $html;
