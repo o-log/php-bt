@@ -78,27 +78,6 @@ class BT
     }
 
     /**
-     * @param $url
-     * @param $text
-     * @return string
-     */
-    /*
-    static public function a($url, $text, $classes_str = '', $target = '')
-    {
-        $target_str = '';
-        if ($target != '') {
-            $target_str = ' target="' . Sanitize::sanitizeAttrValue($target) . '" ';
-        }
-        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '"' . $target_str . '>' . Sanitize::sanitizeTagContent($text) . '</a>';
-    }
-
-    static public function div($html, $attrs = '')
-    {
-        return '<div ' . $attrs . '>' . $html . '</div>';
-    }
-    */
-
-    /**
      * @param $arr array Array of sanitized html
      * @return mixed
      */
@@ -136,7 +115,7 @@ class BT
         return $html;
     }
 
-    static public function tabHtml($text, $match_url, $link_url, $target = '')
+    static public function tabHtml($text, $match_url, $link_url, $requested_url, $target = '')
     {
         $classes = '';
 
@@ -144,8 +123,7 @@ class BT
 
         $url_regexp = '@^' . $match_url . '$@';
         $matches_arr = array();
-        $current_url = self::uri_no_getform(); // TODO: use common request reader
-        if (preg_match($url_regexp, $current_url, $matches_arr)) {
+        if (preg_match($url_regexp, $requested_url, $matches_arr)) {
             $classes .= ' active ';
         }
 
@@ -159,14 +137,6 @@ class BT
         $html .= '</li>';
 
         return $html;
-    }
-
-    static public function uri_no_getform()
-    {
-        $request_uri = array_key_exists('REQUEST_URI', $_SERVER) ? $_SERVER['REQUEST_URI'] : '';
-        $parts = explode('?', $request_uri);
-        $uri_no_getform = $parts[0];
-        return $uri_no_getform;
     }
 
 }

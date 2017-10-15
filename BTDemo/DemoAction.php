@@ -8,6 +8,7 @@ use OLOG\Layouts\AdminLayoutSelector;
 use OLOG\Layouts\MenuInterface;
 use OLOG\Layouts\PageTitleInterface;
 use OLOG\Layouts\PageToolbarHtmlInterface;
+use OLOG\URL;
 
 class DemoAction implements
     PageTitleInterface,
@@ -45,9 +46,9 @@ class DemoAction implements
 
         $html .= BT::tabsHtml(
             [
-                BT::tabHtml('tab1', '/', '/'),
-                BT::tabHtml('tab2', '/2', '/2'),
-                BT::tabHtml('tab3', '/3', '/3')
+                BT::tabHtml('tab1', '/', '/', URL::path()),
+                BT::tabHtml('tab2', '/2', '/2', URL::path()),
+                BT::tabHtml('tab3', '/3', '/3', URL::path())
             ]
         );
 
