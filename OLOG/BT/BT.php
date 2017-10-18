@@ -37,6 +37,38 @@ class BT
         return $out;
     }
 
+    public static function col($cols_xs, $cols_sm, $cols_md, $cols_lg, $content) {
+        if (is_callable($content)) {
+            ob_start();
+            $content();
+            $content = ob_get_clean();
+        }
+
+        $classes = '';
+        if ($cols_lg != ''){
+            $classes .= ' col-lg-' . $cols_lg . ' ';
+        }
+
+        if ($cols_md != ''){
+            $classes .= ' col-md-' . $cols_md . ' ';
+        }
+
+        if ($cols_sm != ''){
+            $classes .= ' col-sm-' . $cols_sm . ' ';
+        }
+
+        if ($cols_xs != ''){
+            $classes .= ' col-xs-' . $cols_xs . ' ';
+        }
+
+        return  '<div  class="' . $classes . '">' . $content . '</div>';
+    }
+
+    /**
+     * @deprecated
+     * @param $html
+     * @return string
+     */
     public static function colLg6($html) {
         if (is_callable($html)) {
             ob_start();
@@ -48,6 +80,11 @@ class BT
         return  '<div ' . $class . ' >' . $html . '</div>';
     }
 
+    /**
+     * @deprecated
+     * @param $html
+     * @return string
+     */
     public static function colSm6($html) {
         if (is_callable($html)) {
             ob_start();

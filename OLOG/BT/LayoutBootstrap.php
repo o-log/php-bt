@@ -11,7 +11,7 @@ class LayoutBootstrap implements
 	LayoutInterface
 {
 
-static public function render($content_html, $action_obj = null) {
+static public function render($content_html_or_callable, $action_obj = null) {
 
 $page_toolbar_html = '';
 
@@ -197,7 +197,11 @@ if ($action_obj) {
 		</h1>
 	</div>
 	<?php
-	echo $content_html;
+    if (is_callable($content_html_or_callable)) {
+        $content_html_or_callable();
+    } else {
+        echo $content_html_or_callable;
+    }
 	?>
 </div>
 </body>

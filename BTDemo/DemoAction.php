@@ -4,7 +4,7 @@ namespace BTDemo;
 
 use OLOG\ActionInterface;
 use OLOG\BT\BT;
-use OLOG\Layouts\AdminLayoutSelector;
+use OLOG\BT\LayoutBootstrap;
 use OLOG\Layouts\MenuInterface;
 use OLOG\Layouts\PageTitleInterface;
 use OLOG\Layouts\PageToolbarHtmlInterface;
@@ -40,18 +40,16 @@ class DemoAction implements
     }
     
     public function action(){
-        $html = '';
+        LayoutBootstrap::render(function (){
+            echo '<div>TEST CONTENT</div>';
 
-        $html .= '<div>TEST CONTENT</div>';
-
-        $html .= BT::tabsHtml(
-            [
-                BT::tabHtml('tab1', '/', '/', URL::path()),
-                BT::tabHtml('tab2', '/2', '/2', URL::path()),
-                BT::tabHtml('tab3', '/3', '/3', URL::path())
-            ]
-        );
-
-        AdminLayoutSelector::render($html, $this);
+            echo BT::tabsHtml(
+                [
+                    BT::tabHtml('tab1', '/', '/', URL::path()),
+                    BT::tabHtml('tab2', '/2', '/2', URL::path()),
+                    BT::tabHtml('tab3', '/3', '/3', URL::path())
+                ]
+            );
+        }, $this);
     }
 }

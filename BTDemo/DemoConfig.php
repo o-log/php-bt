@@ -13,6 +13,6 @@ class DemoConfig
         header('Content-Type: text/html; charset=utf-8');
         date_default_timezone_set('Europe/Moscow');
 
-        LayoutsConfig::setAdminLayoutClassName(LayoutBootstrap::class);
+        //LayoutsConfig::setAdminLayoutClassName(LayoutBootstrap::class);
     }
 }
