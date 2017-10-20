@@ -6,7 +6,7 @@ use OLOG\HTML;
 
 class BT
 {
-    public static function row($html) {
+    static public function row($html) {
         if (is_callable($html)) {
             ob_start();
             $html();
@@ -17,27 +17,7 @@ class BT
         return  '<div ' . $class . ' >' . $html . '</div>';
     }
 
-    public static function panel($heading_html, $html) {
-        if (is_callable($html)) {
-            ob_start();
-            $html();
-            $html = ob_get_clean();
-        }
-
-        $out = '';
-        $out .= '<div class="panel panel-default" >';
-
-        if ($heading_html != '') {
-            $out .= '<div class="panel-heading">' . $heading_html . '</div>';
-        }
-
-        $out .= '<div class="panel-body">' . $html . '</div>';
-        $out .= '</div>';
-
-        return $out;
-    }
-
-    public static function col($cols_xs, $cols_sm, $cols_md, $cols_lg, $content) {
+    static public function col($cols_xs, $cols_sm, $cols_md, $cols_lg, $content) {
         if (is_callable($content)) {
             ob_start();
             $content();
@@ -62,56 +42,6 @@ class BT
         }
 
         return  '<div  class="' . $classes . '">' . $content . '</div>';
-    }
-
-    /**
-     * @deprecated
-     * @param $html
-     * @return string
-     */
-    public static function colLg6($html) {
-        if (is_callable($html)) {
-            ob_start();
-            $html();
-            $html = ob_get_clean();
-        }
-
-        $class = ' class="col-lg-6" ';
-        return  '<div ' . $class . ' >' . $html . '</div>';
-    }
-
-    /**
-     * @deprecated
-     * @param $html
-     * @return string
-     */
-    public static function colSm6($html) {
-        if (is_callable($html)) {
-            ob_start();
-            $html();
-            $html = ob_get_clean();
-        }
-
-        $class = ' class="col-sm-6" ';
-        return  '<div ' . $class . ' >' . $html . '</div>';
-    }
-
-    static public function modal($modal_element_id, $title, $contents_html = ''){
-        $html = '<div class="modal fade" id="' . $modal_element_id . '" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-		<div class="modal-dialog" role="document">
-		<div class="modal-content">
-		<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-		</button>
-		<h4 class="modal-title">' . $title . '</h4>
-		</div>
-		<div class="modal-body">' . $contents_html . '</div>
-		</div>
-		</div>
-		</div>';
-
-        return $html;
     }
 
     /**
@@ -154,23 +84,24 @@ class BT
 
     static public function tabHtml($text, $match_url, $link_url, $requested_url, $target = '')
     {
-        $classes = '';
+        $li_classes_arr = ['nav-item'];
+        $a_classes_arr = ['nav-link'];
 
         // TODO: код взят из Router::match3() - использовать общую реализацию?
 
         $url_regexp = '@^' . $match_url . '$@';
         $matches_arr = array();
         if (preg_match($url_regexp, $requested_url, $matches_arr)) {
-            $classes .= ' active ';
+            $a_classes_arr[] = 'active';
         }
 
         if ($link_url == '') {
-            $classes .= ' disabled ';
+            $li_classes_arr[] = 'disabled';
         }
 
         $html = '';
-        $html .= '<li role="presentation" class="' . HTML::attr($classes) . '">';
-        $html .= HTML::tag('a', ['href' => $link_url, 'target' => $target], $text);
+        $html .= '<li class="' . HTML::attr(implode(' ', $li_classes_arr)) . '">';
+        $html .= HTML::tag('a', ['href' => $link_url, 'target' => $target, 'class' => implode(' ', $a_classes_arr)], $text);
         $html .= '</li>';
 
         return $html;

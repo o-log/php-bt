@@ -12,6 +12,7 @@ class DemoConfig
         // for mac
         header('Content-Type: text/html; charset=utf-8');
         date_default_timezone_set('Europe/Moscow');
+        ini_set('assert.exception', 1);
 
         //LayoutsConfig::setAdminLayoutClassName(LayoutBootstrap::class);
     }

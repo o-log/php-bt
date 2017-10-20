@@ -5,7 +5,8 @@
     "o-log/php-router" : "2.*"
   },
   "require" : {
-    "o-log/php-layouts" : "2.*"
+    "o-log/php-layouts" : "2.*",
+    "twbs/bootstrap": "4.0.0-beta.2"
   },
   "autoload" : {
     "psr-0" : {

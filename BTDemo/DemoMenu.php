@@ -20,6 +20,4 @@ class DemoMenu implements MenuInterface
             ])
         ];
     }
-
-
 }
