@@ -11,17 +11,9 @@ class BootstrapCSSAction implements ActionInterface
     }
 
     public function action(){
-        $name = __DIR__ . '/../../vendor/twbs/bootstrap/dist/css/bootstrap.css';
-        $fp = fopen($name, 'rb');
-        assert($fp);
+        $filepath_in_project_root = 'vendor/twbs/bootstrap/dist/css/bootstrap.css';
+        Passthrough::passthrough($filepath_in_project_root);
 
-        // send the right headers
-        header("Content-Type: text/css");
-        header("Content-Length: " . filesize($name));
-
-        // dump the picture and stop the script
-        fpassthru($fp);
-        exit;
     }
 
 }
