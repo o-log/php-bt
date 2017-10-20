@@ -11,6 +11,8 @@ class BootstrapJSAction implements ActionInterface
     }
 
     public function action(){
+        Passthrough::passthrough('vendor/twbs/bootstrap/dist/js/bootstrap.js');
+        /*
         $name = __DIR__ . '/../../vendor/twbs/bootstrap/dist/js/bootstrap.js';
         $fp = fopen($name, 'rb');
         assert($fp);
@@ -22,6 +24,7 @@ class BootstrapJSAction implements ActionInterface
         // dump the picture and stop the script
         fpassthru($fp);
         exit;
+        */
     }
 
 }

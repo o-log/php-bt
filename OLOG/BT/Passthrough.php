@@ -5,14 +5,17 @@ namespace OLOG\BT;
 class Passthrough
 {
     static public function passthrough($filepath_in_project_root){
+
+        // TODO: use platform path separator in all paths
+
         // first attempt to build full path when library is in vendor
-        $fullpath = __DIR__ . '/../../../../' . $filepath_in_project_root;
+        $fullpath = __DIR__ . '/../../../../../' . $filepath_in_project_root; // go up from this file to the project root level (where vendor folder is)
         if (file_exists($fullpath)){
             self::go($fullpath);
         }
 
         // second attempt to build full path when library is in project root
-        $fullpath = __DIR__ . '/../../' . $filepath_in_project_root;
+        $fullpath = __DIR__ . '/../../' . $filepath_in_project_root; // go up from this file to the project root level (where vendor folder is)
         if (file_exists($fullpath)){
             self::go($fullpath);
         }

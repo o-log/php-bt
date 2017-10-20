@@ -11,6 +11,8 @@ class PopperJSAction implements ActionInterface
     }
 
     public function action(){
+        Passthrough::passthrough('vendor/twbs/bootstrap/assets/js/vendor/popper.min.js');
+        /*
         $name = __DIR__ . '/../../vendor/twbs/bootstrap/assets/js/vendor/popper.min.js';
         $fp = fopen($name, 'rb');
         assert($fp);
@@ -22,6 +24,7 @@ class PopperJSAction implements ActionInterface
         // dump the picture and stop the script
         fpassthru($fp);
         exit;
+        */
     }
 
 }
