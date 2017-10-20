@@ -2,7 +2,7 @@
 
 namespace BTDemo;
 
-use OLOG\BT\LayoutBootstrap;
+use OLOG\BT\LayoutBootstrap4;
 use OLOG\Layouts\LayoutsConfig;
 
 class DemoConfig

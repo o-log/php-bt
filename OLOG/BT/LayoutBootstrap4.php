@@ -11,7 +11,7 @@ use OLOG\Layouts\PageTitleInterface;
 use OLOG\Layouts\PageToolbarHtmlInterface;
 use OLOG\Layouts\TopActionObjInterface;
 
-class LayoutBootstrap implements
+class LayoutBootstrap4 implements
 	LayoutInterface
 {
     static public function render($content_html_or_callable, $action_obj = null) {
@@ -27,7 +27,7 @@ class LayoutBootstrap implements
             <title>Starter Template for Bootstrap</title>
 
             <!-- Bootstrap core CSS -->
-            <link href="/assets/bootstrap.css" rel="stylesheet">
+            <link href="<?= HTML::url((new BootstrapCSSAction())->url()) ?>" rel="stylesheet">
 
             <!-- Custom styles for this template -->
             <!--<link href="starter-template.css" rel="stylesheet">-->
@@ -75,8 +75,8 @@ class LayoutBootstrap implements
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <!--<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
-        <script src="/assets/popper.js"></script>
-        <script src="/assets/bootstrap.js"></script>
+        <script src="<?= HTML::url((new PopperJSAction())->url())?>"></script>
+        <script src="<?= HTML::url((new BootstrapJSAction())->url())?>"></script>
         </body>
         </html>
         <?php

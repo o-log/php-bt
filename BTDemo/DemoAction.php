@@ -4,7 +4,7 @@ namespace BTDemo;
 
 use OLOG\ActionInterface;
 use OLOG\BT\BT;
-use OLOG\BT\LayoutBootstrap;
+use OLOG\BT\LayoutBootstrap4;
 use OLOG\Layouts\MenuInterface;
 use OLOG\Layouts\PageTitleInterface;
 use OLOG\Layouts\PageToolbarHtmlInterface;
@@ -40,7 +40,7 @@ class DemoAction implements
     }
     
     public function action(){
-        LayoutBootstrap::render(function (){
+        LayoutBootstrap4::render(function (){
 
             ?>
             <div class="jumbotron">
