@@ -1,0 +1,13 @@
+#!/bin/bash
+
+TARGET=public/assets/bootstrap4
+
+# remove existing files
+rm -R $TARGET
+
+mkdir -p $TARGET
+cp -R vendor/twbs/bootstrap/dist/css $TARGET
+cp -R vendor/twbs/bootstrap/dist/js $TARGET
+
+mkdir -p ${TARGET}/assets/js
+cp -R vendor/twbs/bootstrap/assets/js/vendor ${TARGET}/assets/js
