@@ -55,20 +55,22 @@ class LayoutBootstrap4 implements
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <?php self::menu($action_obj) ?>
-                    <?php self::user($action_obj) ?>
                 </ul>
+                <!--
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+                -->
+                <ul class="navbar-nav ml-auto">
+                    <?php self::user($action_obj) ?>
+                </ul>
             </div>
         </nav>
 
         <main role="main" class="container">
 
-            <ol class="breadcrumb">
-                <?php self::breadcrumbs($action_obj) ?>
-            </ol>
+            <?php self::breadcrumbs($action_obj) ?>
 
             <?php
             if (is_callable($content_html_or_callable)) {
@@ -94,7 +96,7 @@ class LayoutBootstrap4 implements
 
         ?>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?= $action_obj->currentUserName(); ?></a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i> <?= $action_obj->currentUserName(); ?></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="/auth/logout">Logout</a>
             </div>
@@ -135,14 +137,22 @@ class LayoutBootstrap4 implements
             $breadcrumbs_arr = array_merge($breadcrumbs_arr, $extra_breadcrumbs_arr);
         }
 
-        foreach ($breadcrumbs_arr as $item) {
-            ?><li class="breadcrumb-item"><?= $item ?></li><?php
-        }
+        if (($action_obj instanceof PageTitleInterface) || count($breadcrumbs_arr)) {
+            ?>
+            <ol class="breadcrumb"><?php
 
-        if ($action_obj instanceof PageTitleInterface) {
-            ?><li class="breadcrumb-item active"><?= $action_obj->pageTitle()?></li><?php
-        }
+            foreach ($breadcrumbs_arr as $item) {
+                ?>
+                <li class="breadcrumb-item"><?= $item ?></li><?php
+            }
 
+            if ($action_obj instanceof PageTitleInterface) {
+                ?>
+                <li class="breadcrumb-item active"><?= $action_obj->pageTitle() ?></li><?php
+            }
+
+            ?></ol><?php
+        }
     }
 
     static public function menu($action_obj){

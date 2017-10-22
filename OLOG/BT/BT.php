@@ -6,6 +6,22 @@ use OLOG\HTML;
 
 class BT
 {
+    public static function card($heading_html, $content, $classes_arr = []) {
+        if (is_callable($content)) {
+            ob_start();
+            $content();
+            $content = ob_get_clean();
+        }
+
+        ?><div class="card <?= implode(' ', $classes_arr) ?> "><?php
+
+        if ($heading_html != '') {
+            ?><div class="card-header"><?= $heading_html ?></div><?php
+        }
+
+        ?><div class="card-body"><?= $content ?></div></div><?php
+    }
+
     static public function modal($modal_element_id, $title, $contents_html = ''){
         $html = '<div class="modal" id="' . $modal_element_id . '" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">

@@ -54,6 +54,8 @@ class DemoAction implements
             </div>
             <?php
 
+            BT::card('Card head', 'Card body', [' text-white', 'bg-success']);
+
             echo '<div>Font awesome: <i class="fa fa-address-book"></i> <i class="fa fa-arrow-up"></i></div>';
 
             echo '<div>Tabs below:</div>';

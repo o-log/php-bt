@@ -11,7 +11,7 @@ class CollapsibleWidget
         }
         $id = 'collapsible_' . uniqid();
         return  '<div>
-                    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#'.$id.'" >' . $text . ' </button>
+                    <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#'.$id.'" >' . $text . ' </button>
                  </div>
                  <div id="'.$id.'" class="collapse">
                              ' . $html . '
