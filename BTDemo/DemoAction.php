@@ -5,6 +5,7 @@ namespace BTDemo;
 use OLOG\ActionInterface;
 use OLOG\BT\BT;
 use OLOG\BT\LayoutBootstrap4;
+use OLOG\Layouts\CurrentUserNameInterface;
 use OLOG\Layouts\MenuInterface;
 use OLOG\Layouts\PageTitleInterface;
 use OLOG\Layouts\PageToolbarHtmlInterface;
@@ -14,14 +15,14 @@ class DemoAction implements
     PageTitleInterface,
     PageToolbarHtmlInterface,
     ActionInterface,
-    MenuInterface
+    MenuInterface,
+    CurrentUserNameInterface
 {
     static public function menuArr(){
         return DemoMenu::menuArr();
     }
 
-    public function pageToolbarHtml()
-    {
+    public function pageToolbarHtml(){
         return '<button class="btn btn-default">page toolbar</button>';
     }
 
@@ -41,7 +42,6 @@ class DemoAction implements
     
     public function action(){
         LayoutBootstrap4::render(function (){
-
             ?>
             <div class="jumbotron">
                 <h1 class="display-3">Hello, world!</h1>
@@ -52,9 +52,11 @@ class DemoAction implements
                     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
                 </p>
             </div>
-<?php
+            <?php
 
-            echo '<div>Tabs below</div>';
+            echo '<div>Font awesome: <i class="fa fa-address-book"></i> <i class="fa fa-arrow-up"></i></div>';
+
+            echo '<div>Tabs below:</div>';
 
             echo BT::tabsHtml(
                 [

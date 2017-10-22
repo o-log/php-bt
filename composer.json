@@ -9,7 +9,8 @@
   },
   "require" : {
     "o-log/php-layouts" : "2.*",
-    "twbs/bootstrap": "4.0.0-beta.2"
+    "twbs/bootstrap": "4.0.0-beta.2",
+    "fortawesome/font-awesome" : "4.7.*"
   },
   "autoload-dev" : {
     "psr-0" : {

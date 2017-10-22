@@ -4,6 +4,7 @@ namespace OLOG\BT;
 
 use OLOG\ActionInterface;
 use OLOG\HTML;
+use OLOG\Layouts\CurrentUserNameInterface;
 use OLOG\Layouts\LayoutInterface;
 use OLOG\Layouts\MenuInterface;
 use OLOG\Layouts\MenuItem;
@@ -26,11 +27,9 @@ class LayoutBootstrap4 implements
 
             <title>Starter Template for Bootstrap</title>
 
-            <!-- Bootstrap core CSS -->
+            <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
             <link href="/assets/bootstrap4/css/bootstrap.css" rel="stylesheet">
 
-            <!-- Custom styles for this template -->
-            <!--<link href="starter-template.css" rel="stylesheet">-->
             <style>
                 body {
                     padding-top: 5rem;
@@ -39,7 +38,7 @@ class LayoutBootstrap4 implements
 
             <!-- Bootstrap core JavaScript
             ================================================== -->
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
             <!--<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
             <script src="/assets/bootstrap4/assets/js/vendor/popper.min.js"></script>
             <script src="/assets/bootstrap4/js/bootstrap.js"></script>
@@ -48,14 +47,15 @@ class LayoutBootstrap4 implements
         <body>
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="/">HOME</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <?php self::actionMenuHtml($action_obj) ?>
+                    <?php self::menu($action_obj) ?>
+                    <?php self::user($action_obj) ?>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -65,6 +65,10 @@ class LayoutBootstrap4 implements
         </nav>
 
         <main role="main" class="container">
+
+            <ol class="breadcrumb">
+                <?php self::breadcrumbs($action_obj) ?>
+            </ol>
 
             <?php
             if (is_callable($content_html_or_callable)) {
@@ -83,27 +87,65 @@ class LayoutBootstrap4 implements
 
     }
 
-    static public function actionMenuHtml($action_obj){
-        /*
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-         */
+    static public function user($action_obj){
+        if (!($action_obj instanceof CurrentUserNameInterface)) {
+            return;
+        }
 
+        ?>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?= $action_obj->currentUserName(); ?></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="/auth/logout">Logout</a>
+            </div>
+        </li>
+        <?php
+    }
+
+    static public function breadcrumbs($action_obj){
+        $breadcrumbs_arr = [];
+
+        if ($action_obj instanceof TopActionObjInterface) {
+            $top_action_obj = $action_obj->topActionObj();
+            $extra_breadcrumbs_arr = [];
+
+            while ($top_action_obj) {
+                $top_action_title = '#NO_TITLE#';
+                if ($top_action_obj instanceof PageTitleInterface) {
+                    $top_action_title = $top_action_obj->pageTitle();
+                }
+
+                $top_action_url = '#NO_URL#';
+                if ($top_action_obj instanceof ActionInterface) {
+                    $top_action_url = $top_action_obj->url();
+                }
+
+                array_unshift($extra_breadcrumbs_arr, HTML::a($top_action_url, $top_action_title));
+
+                if ($top_action_obj instanceof TopActionObjInterface) {
+                    if ($top_action_obj != $top_action_obj->topActionObj()) {
+                        $top_action_obj = $top_action_obj->topActionObj();
+                        continue;
+                    }
+                }
+
+                $top_action_obj = null;
+            }
+
+            $breadcrumbs_arr = array_merge($breadcrumbs_arr, $extra_breadcrumbs_arr);
+        }
+
+        foreach ($breadcrumbs_arr as $item) {
+            ?><li class="breadcrumb-item"><?= $item ?></li><?php
+        }
+
+        if ($action_obj instanceof PageTitleInterface) {
+            ?><li class="breadcrumb-item active"><?= $action_obj->pageTitle()?></li><?php
+        }
+
+    }
+
+    static public function menu($action_obj){
         if (!($action_obj instanceof MenuInterface)){
             return;
         }
@@ -160,6 +202,5 @@ class LayoutBootstrap4 implements
                 <?php
             }
         }
-
     }
 }

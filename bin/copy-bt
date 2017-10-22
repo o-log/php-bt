@@ -1,13 +1,17 @@
 #!/bin/bash
 
+SOURCE=vendor/twbs/bootstrap
 TARGET=public/assets/bootstrap4
-
-# remove existing files
 rm -R $TARGET
-
 mkdir -p $TARGET
-cp -R vendor/twbs/bootstrap/dist/css $TARGET
-cp -R vendor/twbs/bootstrap/dist/js $TARGET
-
+cp -vr ${SOURCE}/dist/css $TARGET
+cp -vr ${SOURCE}/dist/js $TARGET
 mkdir -p ${TARGET}/assets/js
-cp -R vendor/twbs/bootstrap/assets/js/vendor ${TARGET}/assets/js
+cp -vr ${SOURCE}/assets/js/vendor ${TARGET}/assets/js
+
+SOURCE=vendor/fortawesome/font-awesome
+TARGET=public/assets/font-awesome
+rm -R $TARGET
+mkdir -p $TARGET
+cp -vr ${SOURCE}/css ${TARGET}
+cp -vr ${SOURCE}/fonts $TARGET
