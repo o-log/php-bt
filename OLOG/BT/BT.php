@@ -22,21 +22,20 @@ class BT
         ?><div class="card-body"><?= $content ?></div></div><?php
     }
 
-    static public function modal($modal_element_id, $title, $contents_html = ''){
-        $html = '<div class="modal" id="' . $modal_element_id . '" tabindex="-1" role="dialog">
+    static public function modal($modal_element_id, $title, callable $contents_callable){
+        ?><div class="modal" id="<?= $modal_element_id ?>" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
 		<div class="modal-header">
-		<h5 class="modal-title">' . $title . '</h5>
+		<h5 class="modal-title"><?= $title ?></h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 		</button>
 		</div>
-		<div class="modal-body">' . $contents_html . '</div>
+		<div class="modal-body"><?php $contents_callable() ?></div>
 		</div>
 		</div>
-		</div>';
-        return $html;
+		</div><?php
     }
 
     static public function row($html) {

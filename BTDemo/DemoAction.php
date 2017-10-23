@@ -67,6 +67,24 @@ class DemoAction implements
                     BT::tabHtml('tab3', '/3', '/3', URL::path())
                 ]
             );
+
+            echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gweihw7twgt">Launch demo modal</button>';
+            BT::modal(
+                    'gweihw7twgt',
+                    'Test modal',
+                    function(){
+                        echo '<div>Modal body</div>';
+                        echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jskbdhvkjsdv342435">Launch 2</button>';
+                    }
+            );
+            BT::modal(
+                'jskbdhvkjsdv342435',
+                'Test modal 2',
+                function(){
+                    echo '<div>Modal 2 body</div>';
+                }
+            );
+
         }, $this);
     }
 }
