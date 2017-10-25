@@ -7,22 +7,27 @@ use OLOG\HTML;
 class BT
 {
     public static function card($heading_html, $content, $classes_arr = []) {
-        if (is_callable($content)) {
-            ob_start();
-            $content();
-            $content = ob_get_clean();
-        }
-
         ?><div class="card <?= implode(' ', $classes_arr) ?> "><?php
 
         if ($heading_html != '') {
             ?><div class="card-header"><?= $heading_html ?></div><?php
         }
 
-        ?><div class="card-body"><?= $content ?></div></div><?php
+        ?><div class="card-body"><?= self::declosure($content) ?></div></div><?php
     }
 
-    static public function modal($modal_element_id, $title, callable $contents_callable){
+    static public function declosure($content){
+        if (!is_callable($content)) {
+            return $content;
+        }
+
+        ob_start();
+        $content();
+        return ob_get_clean();
+    }
+
+    static public function modal($modal_element_id, $title, $content){
+
         ?><div class="modal" id="<?= $modal_element_id ?>" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -32,7 +37,7 @@ class BT
 		<span aria-hidden="true">&times;</span>
 		</button>
 		</div>
-		<div class="modal-body"><?php $contents_callable() ?></div>
+		<div class="modal-body"><?= self::declosure($content) ?></div>
 		</div>
 		</div>
 		</div><?php
@@ -50,12 +55,6 @@ class BT
     }
 
     static public function col($cols_xs, $cols_sm, $cols_md, $cols_lg, $content) {
-        if (is_callable($content)) {
-            ob_start();
-            $content();
-            $content = ob_get_clean();
-        }
-
         $classes = '';
         if ($cols_lg != ''){
             $classes .= ' col-lg-' . $cols_lg . ' ';
@@ -73,7 +72,7 @@ class BT
             $classes .= ' col-xs-' . $cols_xs . ' ';
         }
 
-        return  '<div  class="' . $classes . '">' . $content . '</div>';
+        return  '<div  class="' . $classes . '">' . self::declosure($content) . '</div>';
     }
 
     /**
