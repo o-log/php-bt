@@ -1,9 +1,14 @@
 <?php
+declare(strict_types=1);
+
+/**
+ * @author Oleg Loginov <olognv@gmail.com>
+ */
 
 namespace BTDemo;
 
 use OLOG\ActionInterface;
-use OLOG\BT\BT;
+use OLOG\BT\BT4;
 use OLOG\BT\LayoutBootstrap4;
 use OLOG\Layouts\CurrentUserNameInterface;
 use OLOG\Layouts\MenuInterface;
@@ -39,7 +44,7 @@ class DemoAction implements
     public function url(){
         return '/';
     }
-    
+
     public function action(){
         LayoutBootstrap4::render(function (){
             ?>
@@ -54,22 +59,22 @@ class DemoAction implements
             </div>
             <?php
 
-            BT::card('Card head', 'Card body', [' text-white', 'bg-success']);
+            BT4::card('Card head', 'Card body', [' text-white', 'bg-success']);
 
             echo '<div>Font awesome: <i class="fa fa-address-book"></i> <i class="fa fa-arrow-up"></i></div>';
 
             echo '<div>Tabs below:</div>';
 
-            echo BT::tabsHtml(
+            echo BT4::tabsHtml(
                 [
-                    BT::tabHtml('tab1', '/', '/', URL::path()),
-                    BT::tabHtml('tab2', '/2', '/2', URL::path()),
-                    BT::tabHtml('tab3', '/3', '/3', URL::path())
+                    BT4::tabHtml('tab1', '/', '/', URL::path()),
+                    BT4::tabHtml('tab2', '/2', '/2', URL::path()),
+                    BT4::tabHtml('tab3', '/3', '/3', URL::path())
                 ]
             );
 
             echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gweihw7twgt">Launch demo modal</button>';
-            BT::modal(
+            BT4::modal(
                     'gweihw7twgt',
                     'Test modal',
                     function(){
@@ -77,7 +82,7 @@ class DemoAction implements
                         echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jskbdhvkjsdv342435">Launch 2</button>';
                     }
             );
-            BT::modal(
+            BT4::modal(
                 'jskbdhvkjsdv342435',
                 'Test modal 2',
                 function(){

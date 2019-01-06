@@ -1,10 +1,15 @@
 <?php
+declare(strict_types=1);
+
+/**
+ * @author Oleg Loginov <olognv@gmail.com>
+ */
 
 namespace OLOG\BT;
 
 use OLOG\HTML;
 
-class BT
+class BT4
 {
     public static function card($heading_html, $content, $classes_arr = []) {
         ?><div class="card <?= implode(' ', $classes_arr) ?> "><?php

@@ -1,4 +1,9 @@
 <?php
+declare(strict_types=1);
+
+/**
+ * @author Oleg Loginov <olognv@gmail.com>
+ */
 
 namespace BTDemo;
 
@@ -10,6 +15,6 @@ class DemoConfig
         header('Content-Type: text/html; charset=utf-8');
         date_default_timezone_set('Europe/Moscow');
 
-        ini_set('assert.exception', 1);
+        ini_set('assert.exception', '1');
     }
 }

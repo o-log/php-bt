@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 SOURCE=vendor/twbs/bootstrap
 TARGET=public/assets/bootstrap4

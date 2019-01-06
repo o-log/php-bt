@@ -1,4 +1,9 @@
 <?php
+declare(strict_types=1);
+
+/**
+ * @author Oleg Loginov <olognv@gmail.com>
+ */
 
 namespace OLOG\BT;
 
@@ -9,7 +14,6 @@ use OLOG\Layouts\LayoutInterface;
 use OLOG\Layouts\MenuInterface;
 use OLOG\Layouts\MenuItem;
 use OLOG\Layouts\PageTitleInterface;
-use OLOG\Layouts\PageToolbarHtmlInterface;
 use OLOG\Layouts\TopActionObjInterface;
 
 class LayoutBootstrap4 implements
