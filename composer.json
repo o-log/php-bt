@@ -11,7 +11,7 @@
     "php": ">=7.2",
     "o-log/php-layouts" : "3.*",
     "o-log/php-html" : "3.*",
-    "twbs/bootstrap": "4.0.0-beta.2",
+    "twbs/bootstrap": "4.3.*",
     "fortawesome/font-awesome" : "4.7.*"
   },
   "autoload-dev" : {
